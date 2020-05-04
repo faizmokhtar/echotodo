@@ -3,6 +3,7 @@ package main
 import (
 	"net/http"
 
+	"github.com/faizmokhtar/echotodo/db"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
 )
@@ -23,6 +24,9 @@ func main() {
 	e.GET("/todos/:id", getTodo)
 	e.PUT("/todos/:id", updateTodo)
 	e.DELETE("/todos/:id", deleteTodo)
+
+	d := db.New()
+	db.AutoMigrate(d)
 
 	e.Logger.Fatal(e.Start(":8000"))
 }
