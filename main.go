@@ -22,7 +22,6 @@ func main() {
 		return c.String(http.StatusOK, "hello world!")
 	})
 
-	e.PUT("/todos/:id", updateTodo)
 	e.DELETE("/todos/:id", deleteTodo)
 
 	d := db.New()
@@ -34,12 +33,9 @@ func main() {
 	e.POST("/todos", h.CreateTodo)
 	e.GET("/todos", h.Todos)
 	e.GET("/todos/:id", h.GetTodo)
+	e.PUT("/todos/:id", h.UpdateTodo)
 
 	e.Logger.Fatal(e.Start(":8000"))
-}
-
-func updateTodo(c echo.Context) error {
-	return c.JSON(http.StatusBadGateway, "PUT /todos/:id not implemented")
 }
 
 func deleteTodo(c echo.Context) error {

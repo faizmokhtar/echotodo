@@ -38,3 +38,12 @@ func (ts *TodoStore) GetByID(todoID int) (*model.Todo, error) {
 
 	return &todo, nil
 }
+
+func (ts *TodoStore) Update(t *model.Todo, title string) (*model.Todo, error) {
+	err := ts.db.Model(&t).Update("title", title).Error
+	if err != nil {
+		return nil, err
+	}
+
+	return t, nil
+}

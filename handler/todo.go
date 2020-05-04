@@ -43,3 +43,24 @@ func (h *Handler) GetTodo(c echo.Context) error {
 
 	return c.JSON(http.StatusOK, todo)
 }
+
+func (h Handler) UpdateTodo(c echo.Context) error {
+	id, _ := strconv.Atoi(c.Param("id"))
+	todo, err := h.todoStore.GetByID(id)
+	if err != nil {
+		return c.JSON(http.StatusInternalServerError, err)
+	}
+
+	p := &UpdateRequestPayload{}
+	if err := c.Bind(p); err != nil {
+		return c.JSON(http.StatusUnprocessableEntity, utils.NewError(err))
+	}
+
+	todo, err = h.todoStore.Update(todo, p.Title)
+
+	return c.JSON(http.StatusOK, todo)
+}
+
+type UpdateRequestPayload struct {
+	Title string `json:"title"`
+}
