@@ -22,7 +22,6 @@ func main() {
 		return c.String(http.StatusOK, "hello world!")
 	})
 
-	e.POST("/todos", createTodo)
 	e.GET("/todos/:id", getTodo)
 	e.PUT("/todos/:id", updateTodo)
 	e.DELETE("/todos/:id", deleteTodo)
@@ -37,10 +36,6 @@ func main() {
 	e.GET("/todos", h.Todos)
 
 	e.Logger.Fatal(e.Start(":8000"))
-}
-
-func createTodo(c echo.Context) error {
-	return c.JSON(http.StatusBadGateway, "POST /todos not implemented")
 }
 
 func getTodo(c echo.Context) error {
