@@ -9,4 +9,5 @@ type Todo struct {
 
 type TodoStore interface {
 	Create(*Todo) error
+	List() ([]Todo, error)
 }

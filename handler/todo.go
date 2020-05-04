@@ -22,3 +22,13 @@ func (h *Handler) CreateTodo(c echo.Context) error {
 
 	return c.JSON(http.StatusCreated, todo)
 }
+
+func (h *Handler) Todos(c echo.Context) error {
+	var todos []model.Todo
+	todos, err := h.todoStore.List()
+	if err != nil {
+		return c.JSON(http.StatusInternalServerError, err)
+	}
+
+	return c.JSON(http.StatusOK, todos)
+}

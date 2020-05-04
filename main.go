@@ -34,12 +34,9 @@ func main() {
 	h := handler.NewHandler(ts)
 
 	e.POST("/todos", h.CreateTodo)
+	e.GET("/todos", h.Todos)
 
 	e.Logger.Fatal(e.Start(":8000"))
-}
-
-func getAllTodos(c echo.Context) error {
-	return c.JSON(http.StatusBadGateway, "GET /todos not implemented")
 }
 
 func createTodo(c echo.Context) error {

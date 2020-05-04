@@ -18,3 +18,13 @@ func NewTodoStore(db *gorm.DB) *TodoStore {
 func (ts *TodoStore) Create(t *model.Todo) error {
 	return ts.db.Create(t).Error
 }
+
+func (ts *TodoStore) List() ([]model.Todo, error) {
+	var todos []model.Todo
+	err := ts.db.Find(&todos).Error
+	if err != nil {
+		return nil, err
+	}
+
+	return todos, nil
+}
