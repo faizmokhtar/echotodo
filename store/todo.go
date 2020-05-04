@@ -28,3 +28,13 @@ func (ts *TodoStore) List() ([]model.Todo, error) {
 
 	return todos, nil
 }
+
+func (ts *TodoStore) GetByID(todoID int) (*model.Todo, error) {
+	var todo model.Todo
+	err := ts.db.First(&todo, todoID).Error
+	if err != nil {
+		return nil, err
+	}
+
+	return &todo, nil
+}
