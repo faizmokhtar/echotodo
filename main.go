@@ -3,6 +3,9 @@ package main
 import (
 	"net/http"
 
+	"github.com/faizmokhtar/echotodo/handler"
+	"github.com/faizmokhtar/echotodo/store"
+
 	"github.com/faizmokhtar/echotodo/db"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
@@ -19,7 +22,6 @@ func main() {
 		return c.String(http.StatusOK, "hello world!")
 	})
 
-	e.GET("/todos", getAllTodos)
 	e.POST("/todos", createTodo)
 	e.GET("/todos/:id", getTodo)
 	e.PUT("/todos/:id", updateTodo)
@@ -27,6 +29,11 @@ func main() {
 
 	d := db.New()
 	db.AutoMigrate(d)
+
+	ts := store.NewTodoStore(d)
+	h := handler.NewHandler(ts)
+
+	e.POST("/todos", h.CreateTodo)
 
 	e.Logger.Fatal(e.Start(":8000"))
 }

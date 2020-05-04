@@ -21,7 +21,7 @@ func New() *gorm.DB {
 		host, port, user, password, dbname)
 	db, err := gorm.Open("postgres", psqlInfo)
 	if err != nil {
-		panic("failed to connect database")
+		panic(err)
 	}
 	db.LogMode(true)
 	return db

@@ -1,6 +1,12 @@
 package model
 
+import "github.com/jinzhu/gorm"
+
 type Todo struct {
-	ID    int    `json:"id"`
+	gorm.Model
 	Title string `json:"title"`
+}
+
+type TodoStore interface {
+	Create(*Todo) error
 }
