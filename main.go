@@ -22,8 +22,6 @@ func main() {
 		return c.String(http.StatusOK, "hello world!")
 	})
 
-	e.DELETE("/todos/:id", deleteTodo)
-
 	d := db.New()
 	db.AutoMigrate(d)
 
@@ -34,6 +32,7 @@ func main() {
 	e.GET("/todos", h.Todos)
 	e.GET("/todos/:id", h.GetTodo)
 	e.PUT("/todos/:id", h.UpdateTodo)
+	e.DELETE("/todos/:id", h.DeleteTodo)
 
 	e.Logger.Fatal(e.Start(":8000"))
 }

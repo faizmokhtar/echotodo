@@ -47,3 +47,12 @@ func (ts *TodoStore) Update(t *model.Todo, title string) (*model.Todo, error) {
 
 	return t, nil
 }
+
+func (ts *TodoStore) Delete(t *model.Todo) error {
+	err := ts.db.Delete(&t).Error
+	if err != nil {
+		return err
+	}
+
+	return nil
+}

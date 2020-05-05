@@ -1,10 +1,14 @@
 package model
 
-import "github.com/jinzhu/gorm"
+import (
+	"time"
+)
 
 type Todo struct {
-	gorm.Model
-	Title string `json:"title"`
+	Title     string `json:"title"`
+	ID        uint   `gorm:"primary_key"`
+	CreatedAt time.Time
+	UpdatedAt time.Time
 }
 
 type TodoStore interface {
@@ -12,4 +16,5 @@ type TodoStore interface {
 	List() ([]Todo, error)
 	GetByID(todoID int) (*Todo, error)
 	Update(*Todo, string) (*Todo, error)
+	Delete(*Todo) error
 }
