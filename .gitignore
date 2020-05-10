@@ -25,5 +25,8 @@
 
 # End of https://www.gitignore.io/api/go
 
+# Environment files
+*.env
+
 # Gcloud
 key.json

@@ -5,6 +5,7 @@ import (
 
 	"github.com/faizmokhtar/echotodo/handler"
 	"github.com/faizmokhtar/echotodo/store"
+	"github.com/joho/godotenv"
 
 	"github.com/faizmokhtar/echotodo/db"
 	"github.com/labstack/echo"
@@ -12,6 +13,7 @@ import (
 )
 
 func main() {
+	_ = godotenv.Load(".env")
 	e := echo.New()
 
 	// middleware
@@ -34,7 +36,7 @@ func main() {
 	e.PUT("/todos/:id", h.UpdateTodo)
 	e.DELETE("/todos/:id", h.DeleteTodo)
 
-	e.Logger.Fatal(e.Start(":8000"))
+	e.Logger.Fatal(e.Start(":8080"))
 }
 
 func deleteTodo(c echo.Context) error {
