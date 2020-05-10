@@ -34,7 +34,7 @@ curl -X GET https://todo-dot-toyprojects.appspot.com/todos/1
 
 - Update a todo
 ```
-curl -X DELETE -d '{
+curl -X PUT -d '{
     "title": "buy some coffee"
 }' 'https://todo-dot-toyprojects.appspot.com/todos/1'
 ```
